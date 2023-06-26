@@ -2,7 +2,7 @@
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
   outputs = {nixpkgs, self}: {
     packages = nixpkgs.lib.mapAttrs (system: pkgs: rec {
-      default = pkgs.haskell.lib.doHaddock (pkgs.haskellPackages.callCabal2nix "latest-system" ./. {});
+      default = pkgs.haskell.lib.doHaddock (pkgs.haskellPackages.callPackage ./package.nix {});
       hoogle = pkgs.lib.elemAt (default.envFunc {withHoogle = true;}).nativeBuildInputs 0;
       hoogleSelf = pkgs.haskellPackages.hoogleWithPackages (_: [default]);
       ghc = pkgs.haskellPackages.ghcWithPackages (_: [default]);
