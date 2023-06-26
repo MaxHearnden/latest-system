@@ -1,0 +1,21 @@
+name: latest-system
+version: 0.1.0
+
+library:
+  dependencies:
+    - base
+    - directory
+    - filepath
+    - servant-server
+    - text
+  source-dirs:
+    - src
+
+executable:
+  source-dirs:
+    - src-exe
+  dependencies:
+    - base
+    - warp
+    - latest-system
+  main: Main

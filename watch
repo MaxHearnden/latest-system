@@ -1,0 +1,7 @@
+#!/bin/sh
+builddir=$(printf %q ${1-dist-newstyle})
+watcher=( watchexec -w "$(dirname "$0")" -c --debounce 1000 -r "hpack --silent && cabal build --builddir=$builddir -j\${NIX_BUILD_CORES} && echo -e '\e[0;32msuccess\e[0m' " ) # && YESOD_HOST=127.0.0.1 exec cabal run --builddir=$builddir" )
+if test yes != "$NO_NIX"; then
+  watcher=( nix develop "$(dirname $0)" -i -k TERM -c "${watcher[@]}" )
+fi
+exec "${watcher[@]}"
