@@ -1,5 +1,5 @@
 name: latest-system
-version: 0.1.0
+version: 0.2.0
 
 library:
   dependencies:
@@ -11,11 +11,23 @@ library:
   source-dirs:
     - src
 
-executable:
-  source-dirs:
-    - src-exe
-  dependencies:
-    - base
-    - warp
-    - latest-system
-  main: Main
+executables:
+  latest-system:
+    source-dirs:
+      - src-exe
+    dependencies:
+      - base
+      - warp
+      - latest-system
+    main: Main
+    other-modules: []
+  latest-system-systemd:
+    source-dirs:
+      - src-exe
+    dependencies:
+      - base
+      - warp
+      - latest-system
+      - wai-cli
+    main: Systemd
+    other-modules: []
