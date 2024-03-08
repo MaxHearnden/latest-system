@@ -17,6 +17,7 @@ server = readMachineLink
   where
     readMachineLink name = do
       links <- liftIO $ listDirectory "/nix/var/nix/profiles/all"
+      -- Only read the symlink if exists
       if elem name links then
         liftIO $ getSymbolicLinkTarget $ "/nix/var/nix/profiles/all" </> name
       else
