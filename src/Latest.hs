@@ -16,10 +16,10 @@ server :: Server LatestAPI
 server = readMachineLink
   where
     readMachineLink name = do
-      links <- liftIO $ listDirectory "/nix/var/nix/profiles/all"
+      links <- liftIO $ listDirectory "/nix/var/nix/profiles/all/systems"
       -- Only read the symlink if exists
       if elem name links then
-        liftIO $ getSymbolicLinkTarget $ "/nix/var/nix/profiles/all" </> name
+        liftIO $ getSymbolicLinkTarget $ "/nix/var/nix/profiles/all/systems" </> name
       else
         throwError $ err404 { errBody = "hostname not found in profile" }
 
